@@ -52,7 +52,7 @@ export const constantRoutes = [
         path: "dashboard",
         name: "Dashboard",
         component: () => import("@/views/dashboard/index"),
-        meta: { title: "Dashboard", icon: "dashboard" },
+        meta: { title: "首页", icon: "dashboard" },
       },
     ],
   },
@@ -63,13 +63,15 @@ export const constantRoutes = [
     redirect: "/core/integral-grade/list",
     name: "coreIntegralGrade",
     meta: { title: "积分等级管理", icon: "el-icon-s-marketing" },
+    // false（默认值）：当且仅当父节点下只有一个子节点时，不显示父节点
+    // true：任何时候都显示父节点和子节点
     alwaysShow: true,
     children: [
       {
         path: "list",
-        name: "coreIntegralGradeList",
-        component: () => import("@/views/core/integral-grade/list"),
-        meta: { title: "积分等级列表" },
+        name: "coreIntegralGradeList", //每个路由节点的name的名字不能相同
+        component: () => import("@/views/core/integral-grade/list"), //指向template模板组件
+        meta: { title: "积分等级列表" }, //定义导航的标题
       },
       {
         path: "create",
@@ -78,7 +80,7 @@ export const constantRoutes = [
         meta: { title: "新增积分等级" },
       },
       {
-        path: "edit/:id",
+        path: "edit/:id", // :id 是一个占位符，表示这部分url会是任何一个id
         name: "coreIntegralGradeEdit",
         component: () => import("@/views/core/integral-grade/form"),
         meta: { title: "编辑积分等级" },
@@ -92,19 +94,19 @@ export const constantRoutes = [
     component: Layout,
     redirect: "/example/table",
     name: "Example",
-    meta: { title: "Example", icon: "el-icon-s-help" },
+    meta: { title: "例子", icon: "el-icon-s-help" },
     children: [
       {
         path: "table",
         name: "Table",
         component: () => import("@/views/table/index"),
-        meta: { title: "Table", icon: "table" },
+        meta: { title: "表格", icon: "table" },
       },
       {
         path: "tree",
         name: "Tree",
         component: () => import("@/views/tree/index"),
-        meta: { title: "Tree", icon: "tree" },
+        meta: { title: "树", icon: "tree" },
       },
     ],
   },
@@ -112,12 +114,14 @@ export const constantRoutes = [
   {
     path: "/form",
     component: Layout,
+    meta: { title: "一级标题", icon: "el-icon-goods" },
+    alwaysShow: true,
     children: [
       {
         path: "index",
         name: "Form",
         component: () => import("@/views/form/index"),
-        meta: { title: "Form", icon: "form" },
+        meta: { title: "表单", icon: "form" },
       },
     ],
   },
