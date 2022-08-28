@@ -69,7 +69,7 @@ export default {
     // 调用api层获取数据库中的数据
     fetchData() {
       dictApi.listByParentId(1).then((response) => {
-        this.list = response.data.dictList;
+        this.list = response.data.list;
       });
     },
 
@@ -77,7 +77,7 @@ export default {
     getChildren(row, treeNode, resolve) {
       dictApi.listByParentId(row.id).then((response) => {
         //负责将子节点数据展示在展开的列表中
-        resolve(response.data);
+        resolve(response.data.list);
       });
     },
     // 上传多于一个文件时
@@ -111,7 +111,7 @@ export default {
       console.log("treeNode", treeNode);
       //获取数据
       dictApi.listByParentId(tree.id).then((response) => {
-        resolve(response.data);
+        resolve(response.data.list);
       });
     },
   },

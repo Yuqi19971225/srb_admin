@@ -94,6 +94,13 @@
           >
             解锁
           </el-button>
+          <el-button
+            type="primary"
+            size="mini"
+            @click="showLoginRecord(scope.row.id)"
+          >
+            登录日志
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -109,6 +116,15 @@
       @size-change="changePageSize"
       @current-change="changeCurrentPage"
     />
+
+    <!-- 用户登录日志 -->
+    <el-dialog title="用户登录日志" :visible.sync="dialogTableVisible">
+      <el-table :data="loginRecordList" border stripe>
+        <el-table-column type="index" />
+        <el-table-column prop="ip" label="IP" />
+        <el-table-column prop="createTime" label="登录时间" />
+      </el-table>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -141,7 +157,15 @@ export default {
           this.total = response.data.pageModel.total;
         });
     },
-
+    // 根据id查询会员日志记录
+    showLoginRecord(id) {
+      //打开对话框
+      this.dialogTableVisible = true;
+      //加载数据列表
+      userInfoApi.getuserLoginRecordTop50(id).then((response) => {
+        this.loginRecordList = response.data.list;
+      });
+    },
     // 每页记录数改变，size：回调参数，表示当前选中的“每页条数”
     changePageSize(size) {
       this.limit = size;
