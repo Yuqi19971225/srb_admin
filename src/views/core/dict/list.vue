@@ -69,7 +69,7 @@ export default {
     // 调用api层获取数据库中的数据
     fetchData() {
       dictApi.listByParentId(1).then((response) => {
-        this.list = response.data;
+        this.list = response.data.dictList;
       });
     },
 

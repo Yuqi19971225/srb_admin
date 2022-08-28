@@ -52,7 +52,7 @@ export default {
     // 根据id查询记录
     fetchDataById(id) {
       integralGradeApi.getById(id).then((response) => {
-        this.integralGrade = response.data;
+        this.integralGrade = response.data.dictList;
       });
     },
     //保存或更新
